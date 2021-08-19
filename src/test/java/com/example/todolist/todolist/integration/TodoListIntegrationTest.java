@@ -60,4 +60,21 @@ public class TodoListIntegrationTest {
                 .andExpect(jsonPath("$[1].text").value("My second todo item"))
                 .andExpect(jsonPath("$.*", Matchers.hasSize(4)));
     }
+    @Test
+    void should_create_a_new_todo_item_when_addTodoItem_API() throws Exception {
+        //given
+        String newTodoItem = "{\n" +
+                "  \"text\": \"My fifth todo item\",\n" +
+                "  \"done\": false\n" +
+                "}";
+        //when
+        //then
+        mockMvc.perform(MockMvcRequestBuilders.post("/todos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(newTodoItem))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.text").value("My fifth todo item"))
+                .andExpect(jsonPath("$.done").value(false));
+    }
 }
