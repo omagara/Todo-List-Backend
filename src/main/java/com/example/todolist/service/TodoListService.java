@@ -28,4 +28,12 @@ public class TodoListService {
         todoListRepository.deleteById(id);
     }
 
+    public Todo updateTodoItem(Integer id, Todo todo){
+        Todo retrievedTodoItem = todoListRepository.findById(id).orElse(null);
+        if (retrievedTodoItem != null) {
+            retrievedTodoItem.setDone(todo.isDone());
+        }
+        return todoListRepository.save(retrievedTodoItem);
+    }
+
 }
