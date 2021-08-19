@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -95,7 +96,19 @@ public class TodoListIntegrationTest {
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.text").value("My fourth todo item"))
                 .andExpect(jsonPath("$.done").value(true));
+    }
 
+    @Test
+    void should_delete_selected_todo_item_when_deleteTodoItem_API() throws Exception {
+        //given
+        Todo firstTodoItem = todoListRepository.save(todoItemsInfo.get(0));
+        Integer itemId = firstTodoItem.getId();
+
+        //when
+        //then
+        mockMvc.perform(MockMvcRequestBuilders.delete("/todos/{itemId}", String.valueOf(itemId)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").doesNotExist());
 
     }
 }
