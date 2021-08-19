@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/todos")
 public class TodoListController {
     @Autowired
-    private TodoListService todoListService;
+    private final TodoListService todoListService;
 
     public TodoListController(TodoListService todoListService) {
         this.todoListService = todoListService;
@@ -28,15 +28,4 @@ public class TodoListController {
     public Todo addTodoItem(@RequestBody Todo todo){
         return todoListService.addTodoItem(todo);
     }
-
-    @PutMapping("/{todoItemid}")
-    public Todo updateTodoItem (@PathVariable Integer todoItemid, @RequestBody Todo todo){
-        return todoListService.updateTodoItem(todoItemid, todo);
-    }
-
-    @DeleteMapping("/{todoItemid}")
-    public void deleteTodoItem (@PathVariable Integer todoItemid){
-        todoListService.deleteTodoItem(todoItemid);
-    }
-
 }
