@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class TodoListService {
     @Autowired
-    private TodoListRepository todoListRepository;
+    private final TodoListRepository todoListRepository;
 
     public TodoListService(TodoListRepository todoListRepository) {
         this.todoListRepository = todoListRepository;
@@ -22,6 +22,10 @@ public class TodoListService {
 
     public Todo addTodoItem(Todo todo){
         return todoListRepository.save(todo);
+    }
+
+    public void deleteTodoItem(Integer id){
+        todoListRepository.deleteById(id);
     }
 
 }
