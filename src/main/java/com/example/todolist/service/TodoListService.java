@@ -24,18 +24,4 @@ public class TodoListService {
         return todoListRepository.save(todo);
     }
 
-    public Todo updateTodoItem(Integer id, Todo todo){
-        Todo retrievedTodoItem = retrieve(id);
-        retrievedTodoItem.setDone(todo.isDone());
-        return todoListRepository.save(retrievedTodoItem);
-    }
-
-    public void deleteTodoItem(Integer id){
-        todoListRepository.deleteById(id);
-    }
-
-    public Todo retrieve(Integer id) {
-        return todoListRepository.findById(id)
-                .orElse(null);
-    }
 }
