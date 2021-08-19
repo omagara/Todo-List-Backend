@@ -77,4 +77,25 @@ public class TodoListIntegrationTest {
                 .andExpect(jsonPath("$.text").value("My fifth todo item"))
                 .andExpect(jsonPath("$.done").value(false));
     }
+
+    @Test
+    void should_toggle_the_status_of_the_todo_item_when_updateTodoItem_API() throws Exception {
+        //given
+        Todo todoItem = todoListRepository.save(todoItemsInfo.get(3));
+        Integer itemId = todoItem.getId();
+        String updatedTodoItem = "{\n" +
+                "        \"done\": true\n" +
+                "}\n";
+        //when
+        //then
+        mockMvc.perform(MockMvcRequestBuilders.put("/todos/{itemId}", String.valueOf(itemId))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(updatedTodoItem))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.text").value("My fourth todo item"))
+                .andExpect(jsonPath("$.done").value(true));
+
+
+    }
 }
