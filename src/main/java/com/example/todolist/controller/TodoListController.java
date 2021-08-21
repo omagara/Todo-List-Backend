@@ -35,14 +35,14 @@ public class TodoListController {
         return todoMapper.toResponse(todo);
     }
 
-    @PutMapping("/{todoItemid}")
-    public TodoResponse updateTodoItem (@PathVariable Integer todoItemid, @RequestBody TodoRequest todoRequest){
-        Todo todo = todoListService.updateTodoItem(todoItemid, todoMapper.toEntity(todoRequest));
+    @PutMapping("/{todoItemId}")
+    public TodoResponse updateTodoItem (@PathVariable Integer todoItemId, @RequestBody TodoRequest todoRequest){
+        Todo todo = todoListService.updateTodoItem(todoItemId, todoMapper.toEntity(todoRequest));
         return todoMapper.toResponse(todo);
     }
 
-    @DeleteMapping("/{todoItemid}")
-    public void deleteTodoItem (@PathVariable Integer todoItemid){
-        todoListService.deleteTodoItem(todoItemid);
+    @DeleteMapping("/{todoItemId}")
+    public void deleteTodoItem (@PathVariable Integer todoItemId){
+        todoListService.deleteTodoItem(todoItemId);
     }
 }
