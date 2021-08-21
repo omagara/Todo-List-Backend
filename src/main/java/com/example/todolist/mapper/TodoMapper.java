@@ -6,6 +6,9 @@ import com.example.todolist.entity.Todo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class TodoMapper {
     public Todo toEntity(TodoRequest todoRequest) {
@@ -18,5 +21,11 @@ public class TodoMapper {
         TodoResponse todoResponse = new TodoResponse();
         BeanUtils.copyProperties(todo, todoResponse);
         return todoResponse;
+    }
+
+    public List<TodoResponse> toResponse(List<Todo> todoList) {
+        return todoList.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
 }
