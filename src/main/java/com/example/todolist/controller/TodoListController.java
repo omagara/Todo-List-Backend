@@ -4,10 +4,10 @@ import com.example.todolist.dto.TodoRequest;
 import com.example.todolist.dto.TodoResponse;
 import com.example.todolist.entity.Todo;
 import com.example.todolist.mapper.TodoMapper;
+import com.example.todolist.service.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import com.example.todolist.service.TodoListService;
 
 import java.util.List;
 
