@@ -24,25 +24,25 @@ public class TodoListController {
     }
 
     @GetMapping
-    public List<TodoResponse> getAllTodoItems(){
+    public List<TodoResponse> getAllTodoItems() {
         return todoMapper.toResponse(todoListService.getAllTodoItems());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TodoResponse addTodoItem(@RequestBody TodoRequest todoRequest){
+    public TodoResponse addTodoItem(@RequestBody TodoRequest todoRequest) {
         Todo todo = todoListService.addTodoItem(todoMapper.toEntity(todoRequest));
         return todoMapper.toResponse(todo);
     }
 
     @PutMapping("/{todoItemId}")
-    public TodoResponse updateTodoItem (@PathVariable Integer todoItemId, @RequestBody TodoRequest todoRequest){
+    public TodoResponse updateTodoItem(@PathVariable Integer todoItemId, @RequestBody TodoRequest todoRequest) {
         Todo todo = todoListService.updateTodoItem(todoItemId, todoMapper.toEntity(todoRequest));
         return todoMapper.toResponse(todo);
     }
 
     @DeleteMapping("/{todoItemId}")
-    public void deleteTodoItem (@PathVariable Integer todoItemId){
+    public void deleteTodoItem(@PathVariable Integer todoItemId) {
         todoListService.deleteTodoItem(todoItemId);
     }
 }

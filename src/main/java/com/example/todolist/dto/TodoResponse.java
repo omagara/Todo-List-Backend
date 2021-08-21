@@ -16,7 +16,7 @@ public class TodoResponse {
         this.done = done;
     }
 
-    public TodoResponse(){
+    public TodoResponse() {
 
     }
 

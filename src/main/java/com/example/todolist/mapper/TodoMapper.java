@@ -17,7 +17,7 @@ public class TodoMapper {
         return todo;
     }
 
-    public TodoResponse toResponse(Todo todo){
+    public TodoResponse toResponse(Todo todo) {
         TodoResponse todoResponse = new TodoResponse();
         BeanUtils.copyProperties(todo, todoResponse);
         return todoResponse;

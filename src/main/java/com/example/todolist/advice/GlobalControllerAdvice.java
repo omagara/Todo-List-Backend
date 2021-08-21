@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class GlobalControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler
-    public ErrorResponse todoItemNotFoundExceptionHandling(TodoItemNotFoundException todoItemNotFoundException){
+    public ErrorResponse todoItemNotFoundExceptionHandling(TodoItemNotFoundException todoItemNotFoundException) {
         return new ErrorResponse(todoItemNotFoundException.getMessage());
     }
 }

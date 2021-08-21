@@ -15,7 +15,7 @@ public class TodoRequest {
         this.done = done;
     }
 
-    public TodoRequest(){
+    public TodoRequest() {
 
     }
 

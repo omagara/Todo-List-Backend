@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Todo {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String text;
     private boolean done;
@@ -18,7 +18,7 @@ public class Todo {
         this.done = done;
     }
 
-    public Todo(){
+    public Todo() {
 
     }
 

@@ -36,6 +36,7 @@ public class TodoListIntegrationTest {
     void tearDown() {
         todoListRepository.deleteAll();
     }
+
     @BeforeEach
     public void todoItemsInformation() {
         todoItemsInfo = Arrays.asList(
@@ -61,6 +62,7 @@ public class TodoListIntegrationTest {
                 .andExpect(jsonPath("$[1].text").value("My second todo item"))
                 .andExpect(jsonPath("$.*", Matchers.hasSize(4)));
     }
+
     @Test
     void should_create_a_new_todo_item_when_addTodoItem_API() throws Exception {
         //given
