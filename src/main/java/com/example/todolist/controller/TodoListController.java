@@ -1,6 +1,7 @@
 package com.example.todolist.controller;
 
 import com.example.todolist.dto.TodoRequest;
+import com.example.todolist.dto.TodoResponse;
 import com.example.todolist.entity.Todo;
 import com.example.todolist.mapper.TodoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +24,21 @@ public class TodoListController {
     }
 
     @GetMapping
-    public List<Todo> getAllTodoItems(){
-        return todoListService.getAllTodoItems();
+    public List<TodoResponse> getAllTodoItems(){
+        return todoMapper.toResponse(todoListService.getAllTodoItems());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Todo addTodoItem(@RequestBody TodoRequest todoRequest){
-        return todoListService.addTodoItem(todoMapper.toEntity(todoRequest));
+    public TodoResponse addTodoItem(@RequestBody TodoRequest todoRequest){
+        Todo todo = todoListService.addTodoItem(todoMapper.toEntity(todoRequest));
+        return todoMapper.toResponse(todo);
     }
 
     @PutMapping("/{todoItemid}")
-    public Todo updateTodoItem (@PathVariable Integer todoItemid, @RequestBody TodoRequest todoRequest){
-        return todoListService.updateTodoItem(todoItemid, todoMapper.toEntity(todoRequest));
+    public TodoResponse updateTodoItem (@PathVariable Integer todoItemid, @RequestBody TodoRequest todoRequest){
+        Todo todo = todoListService.updateTodoItem(todoItemid, todoMapper.toEntity(todoRequest));
+        return todoMapper.toResponse(todo);
     }
 
     @DeleteMapping("/{todoItemid}")
