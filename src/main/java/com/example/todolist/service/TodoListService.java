@@ -29,13 +29,21 @@ public class TodoListService {
         todoListRepository.deleteById(id);
     }
 
-    public Todo updateTodoItem(Integer id, Todo todo){
+    public Todo updateTodoItem(Integer id, Todo todoItemToBeUpdated){
         Todo retrievedTodoItem = todoListRepository.findById(id)
                 .orElseThrow( () -> new TodoItemNotFoundException(TODO_MESSAGE));
-        if (retrievedTodoItem != null) {
-            retrievedTodoItem.setDone(todo.isDone());
-        }
-        return todoListRepository.save(retrievedTodoItem);
+        return todoListRepository.save(updateTodoItemInfo(retrievedTodoItem, todoItemToBeUpdated));
     }
+
+    public Todo updateTodoItemInfo(Todo todo, Todo todoItemToBeUpdated){
+        if (todo.isDone() != todoItemToBeUpdated.isDone()){
+            todo.setDone(todoItemToBeUpdated.isDone());
+        }
+        if (todoItemToBeUpdated.getText() != null && !todoItemToBeUpdated.getText().equals(todo.getText())){
+            todo.setText(todoItemToBeUpdated.getText());
+        }
+        return todo;
+    }
+
 
 }
