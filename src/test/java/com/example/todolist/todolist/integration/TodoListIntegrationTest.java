@@ -85,16 +85,16 @@ public class TodoListIntegrationTest {
         Todo todoItem = todoListRepository.save(todoItemsInfo.get(3));
         Integer itemId = todoItem.getId();
         String updatedTodoItem = "{\n" +
-                "        \"done\": true\n" +
-                "}\n";
-        //when
+                "    \"text\": \"My updated fourth todo item\",\n" +
+                "    \"done\": \"true\"\n" +
+                "}";
         //then
         mockMvc.perform(MockMvcRequestBuilders.put("/todos/{itemId}", String.valueOf(itemId))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(updatedTodoItem))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.text").value("My fourth todo item"))
+                .andExpect(jsonPath("$.text").value("My updated fourth todo item"))
                 .andExpect(jsonPath("$.done").value(true));
     }
 
@@ -109,6 +109,5 @@ public class TodoListIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/todos/{itemId}", String.valueOf(itemId)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").doesNotExist());
-
     }
 }
